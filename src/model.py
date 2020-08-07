@@ -21,7 +21,7 @@ class SEResNext50_32x4d(nn.Module):
         out = self.out(x)
         loss = nn.BCEWithLogitsLoss()(
             out, targets.reshape(-1, 1).type_as(out)
-        )
+        ).cuda(gpu)
         return out, loss
 
 

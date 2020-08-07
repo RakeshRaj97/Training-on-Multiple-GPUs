@@ -18,7 +18,7 @@ class Engine:
             data_loader,
             model,
             optimizer,
-            device,
+            #device,
             scheduler=None,
             fp16=False,
             accumulation_steps=1,
@@ -32,7 +32,8 @@ class Engine:
         tk0 = tqdm(data_loader, total=len(data_loader))
         for b_idx, data in enumerate(tk0):
             for key, value in data.items():
-                data[key] = value.to(device)
+                #data[key] = value.to(device)
+                data[key] = value.cuda(non_blocking=True)
             if accumulation_steps == 1 and b_idx == 0:
                 optimizer.zero_grad()
             _, loss = model(**data)
@@ -65,7 +66,8 @@ class Engine:
             tk0 = tqdm(data_loader, total=len(data_loader))
             for b_idx, data in enumerate(tk0):
                 for key, value in data.items():
-                    data[key] = value.to(device)
+                    #data[key] = value.to(device)
+                    data[key] = value.cuda(non_blocking=True)
                 predictions, loss = model(**data)
                 predictions = predictions.cpu()
                 losses.update(loss.item(), data_loader.batch_size)
