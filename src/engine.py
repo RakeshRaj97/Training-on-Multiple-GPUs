@@ -57,7 +57,7 @@ class Engine:
     def evaluate(
             data_loader,
             model,
-            device,
+            #device,
     ):
         losses = AverageMeter()
         final_predictions = []

@@ -67,7 +67,7 @@ def train(gpu, args):
     dist.init_process_group(backend='nccl', init_method='env://', world_size=args.world_size, rank=rank)
     torch.manual_seed(0)
     training_data_path = "/fred/oz138/test/input/train"
-    model_path = "/home/rgopala/image-classification/model"
+    model_path = "/home/rgopala/Training-on-Multiple-GPUs/model1"
     df = pd.read_csv("/fred/oz138/test/input/train_folds.csv")
     # device = 'cuda'
     # device = xm.xla_device()
