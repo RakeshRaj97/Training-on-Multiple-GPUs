@@ -1,0 +1,4 @@
+albumentations
+pretrainedmodels
+torch torchvision
+wtfml==0.0.2
