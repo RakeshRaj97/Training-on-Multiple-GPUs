@@ -18,10 +18,9 @@ class Engine:
             data_loader,
             model,
             optimizer,
-            #device,
             scheduler=None,
-            fp16=False,
             accumulation_steps=1,
+            fp16=False
     ):
         if fp16 and not _apex_available:
             raise Exception("You want to use fp16 but you dont have apex installed")
@@ -32,7 +31,6 @@ class Engine:
         tk0 = tqdm(data_loader, total=len(data_loader))
         for b_idx, data in enumerate(tk0):
             for key, value in data.items():
-                #data[key] = value.to(device)
                 data[key] = value.cuda(non_blocking=True)
             if accumulation_steps == 1 and b_idx == 0:
                 optimizer.zero_grad()
@@ -56,8 +54,7 @@ class Engine:
     @staticmethod
     def evaluate(
             data_loader,
-            model,
-            #device,
+            model
     ):
         losses = AverageMeter()
         final_predictions = []
@@ -66,7 +63,6 @@ class Engine:
             tk0 = tqdm(data_loader, total=len(data_loader))
             for b_idx, data in enumerate(tk0):
                 for key, value in data.items():
-                    #data[key] = value.to(device)
                     data[key] = value.cuda(non_blocking=True)
                 predictions, loss = model(**data)
                 predictions = predictions.cpu()
