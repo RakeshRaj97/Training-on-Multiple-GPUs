@@ -17,6 +17,7 @@ Use the below commands to run the program
 `cd src/`
 
 Replace line 35 with your ip address in train.py 
+
 Replace lines 46, 47 and 48 with your file paths in train.py
 
 `python train.py`
