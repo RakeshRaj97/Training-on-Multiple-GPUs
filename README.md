@@ -16,6 +16,8 @@ Use the below commands to run the program
 
 `cd src/`
 
+Replace line 35 with your ip address in train.py 
+
 `python train.py`
 
 If you want to use multiple GPUs to train, use the argument `-g x` where x is the number of GPUs
