@@ -20,6 +20,8 @@ Replace line 35 with your ip address in train.py
 
 Replace lines 46, 47 and 48 with your file paths in train.py
 
+Run the program using the command
+
 `python train.py`
 
 If you want to use multiple GPUs to train, use the argument `-g x` where x is the number of GPUs
