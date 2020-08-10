@@ -32,8 +32,8 @@ def main():
                         help='ranking within the nodes')
     args = parser.parse_args()
     args.world_size = args.gpus * args.nodes
-    os.environ['MASTER_ADDR'] = '192.168.44.113'  # replace with your ip address
-    os.environ['MASTER_PORT'] = '8888'
+    os.environ['MASTER_ADDR'] = '192.168.44.101'  # replace with your ip address
+    os.environ['MASTER_PORT'] = '8880'
     mp.spawn(train, nprocs=args.gpus, args=(args,))
 
 
@@ -150,8 +150,8 @@ def train(gpu, args):
             )
             predictions, valid_loss = Engine.evaluate(
                 valid_loader,
-                model,
-                optimizer
+                model
+        
             )
 
             predictions = np.vstack(predictions).ravel()
