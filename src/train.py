@@ -151,7 +151,6 @@ def train(gpu, args):
             predictions, valid_loss = Engine.evaluate(
                 valid_loader,
                 model
-        
             )
 
             predictions = np.vstack(predictions).ravel()
