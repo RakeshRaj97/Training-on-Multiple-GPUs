@@ -1,6 +1,7 @@
 # engine.py
 import torch
 import torch.nn as nn
+import torch.distributed as dist
 from tqdm import tqdm
 from average_meter import AverageMeter
 
@@ -13,6 +14,10 @@ except ImportError:
 
 
 class Engine:
+
+    #def cleanup():
+    #    dist.destroy_process_group()
+    
     @staticmethod
     def train(
             data_loader,
@@ -45,6 +50,7 @@ class Engine:
                         optimizer.step()
                         if scheduler is not None:
                             scheduler.step()
+                            #cleanup()
                         if b_idx > 0:
                             optimizer.zero_grad()
             losses.update(loss.item(), data_loader.batch_size)
@@ -71,4 +77,6 @@ class Engine:
                 final_predictions.append(predictions)
                 tk0.set_postfix(loss=losses.avg)
         return final_predictions, losses.avg
+        
+     
 

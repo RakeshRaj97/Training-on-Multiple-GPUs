@@ -32,8 +32,8 @@ def main():
                         help='ranking within the nodes')
     args = parser.parse_args()
     args.world_size = args.gpus * args.nodes
-    os.environ['MASTER_ADDR'] = '192.168.44.136'  # replace with your ip address
-    os.environ['MASTER_PORT'] = '8882'
+    os.environ['MASTER_ADDR'] = '192.168.44.215'  # replace with your ip address
+    os.environ['MASTER_PORT'] = '8888'
     mp.spawn(train, nprocs=args.gpus, args=(args,))
 
 
@@ -113,7 +113,7 @@ def train(gpu, args):
             train_dataset,
             batch_size=train_bs,
             shuffle=False,
-            num_workers=4,
+            num_workers=0,
             pin_memory=True,
             sampler=train_sampler
         )
@@ -131,7 +131,7 @@ def train(gpu, args):
             batch_size=valid_bs,
             shuffle=False,
             drop_last=False,
-            num_workers=4,
+            num_workers=0,
             pin_memory=True,
         )
 
@@ -141,6 +141,7 @@ def train(gpu, args):
                 train_loader,
                 model,
                 optimizer,
+                scheduler=scheduler,
                 fp16=True
             )
             model.to(device)
@@ -154,11 +155,13 @@ def train(gpu, args):
             auc = metrics.roc_auc_score(valid_targets, predictions)
             scheduler.step(auc)
             print(f"epoch={epoch}, auc={auc}")
+            #dist.destroy_process_group() if torch.cuda.device_count() > 1 else None
+            #torch.cuda.empty_cache() 
             es(auc, model, os.path.join(model_path, f"model{fold}.bin"))
             if es.early_stop:
                 print("early stopping")
                 break
-
+            
 
 if __name__ == "__main__":
 
