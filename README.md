@@ -5,6 +5,8 @@ This repository will demonstrate how to train a DNN model on multiple GPUs using
 
 Download the dataset from [kaggle](https://www.kaggle.com/c/siim-isic-melanoma-classification/discussion/164092)
 
+Install PyTorch using the command `conda install pytorch torchvision cudatoolkit=10.2 -c pytorch`
+
 Install the required dependencies using the command `pip install -r requirements.txt`
 
 ### Install Apex 
