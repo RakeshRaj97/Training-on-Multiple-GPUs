@@ -51,7 +51,6 @@ def train(gpu, args):
         valid_bs = 16
         mean = (0.485, 0.456, 0.406)
         std = (0.229, 0.224, 0.225)
-        #cuda0 = torch.device('cuda:0')
         device = "cuda"
         df_train = df[df.kfold != fold].reset_index(drop=True)
         df_valid = df[df.kfold == fold].reset_index(drop=True)
@@ -114,7 +113,7 @@ def train(gpu, args):
             train_dataset,
             batch_size=train_bs,
             shuffle=False,
-            num_workers=0,
+            num_workers=4,
             pin_memory=True,
             sampler=train_sampler
         )
@@ -126,12 +125,7 @@ def train(gpu, args):
             augmentations=valid_aug
         )
 
-        #valid_sampler = torch.utils.data.distributed.DistributedSampler(
-        #    valid_dataset,
-        #    num_replicas=args.world_size,
-        #    rank=rank
-        #)
-
+       
         valid_loader = torch.utils.data.DataLoader(
             valid_dataset,
             batch_size=valid_bs,
@@ -139,17 +133,16 @@ def train(gpu, args):
             drop_last=False,
             num_workers=4,
             pin_memory=True,
-        #    sampler=valid_sampler
         )
 
         es = EarlyStopping(patience=5, mode="max")
         for epoch in range(epochs):
-        #    training_loss = Engine.train(
-        #        train_loader,
-        #        model,
-        #        optimizer,
-        #        fp16=True
-        #    )
+            training_loss = Engine.train(
+                train_loader,
+                model,
+                optimizer,
+                fp16=True
+            )
             model.to(device)
             predictions, valid_loss = Engine.evaluate(
                 valid_loader,

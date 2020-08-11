@@ -64,7 +64,6 @@ class Engine:
             tk0 = tqdm(data_loader, total=len(data_loader))
             for b_idx, data in enumerate(tk0):
                 for key, value in data.items():
-                #    data[key] = value.cuda(non_blocking=True)
                      data[key] = value.to(device)
                 predictions, loss = model(**data)
                 predictions = predictions.cpu()
