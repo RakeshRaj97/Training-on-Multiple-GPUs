@@ -18,6 +18,10 @@ Install the required dependencies using the command `pip install -r requirements
 ### Install Apex 
 If using pip use this [link](https://github.com/NVIDIA/apex) else if conda use this [link](https://anaconda.org/conda-forge/nvidia-apex)
 
+## Cross validation
+
+Stratified KFold cross validation with 10 splits has been performed and saved as `train_folds.csv`
+
 ## Test the program
 
 Use the below commands to run the program
