@@ -1,9 +1,15 @@
 # Training-on-Multiple-GPUs
 This repository will demonstrate how to train a DNN model on multiple GPUs using PyTorch framework
 
-## Dependencies
+## Problem Statement
+
+Use images to identify melanoma(skin cancer)
 
 Download the dataset from [kaggle](https://www.kaggle.com/c/siim-isic-melanoma-classification/discussion/164092)
+
+The dataset is highly imbalanced which consists of 33126 images of which only 584(1.7%) are melanoma images
+
+## Dependencies
 
 Install PyTorch using the command `conda install pytorch torchvision cudatoolkit=10.2 -c pytorch`
 
