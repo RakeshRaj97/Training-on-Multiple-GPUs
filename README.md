@@ -41,3 +41,7 @@ If you want to use multiple GPUs to train, use the argument `-g x` where x is th
 For example use the command `python train.py -g 2` to use 2 GPUs
 
 Try to change the port number in line 36 of `train.py` if you encounter Runtime Error: Address already in use
+
+
+### Note: 
+This repository is experimental. Feel free to send a pull request if found any bugs/improvements
