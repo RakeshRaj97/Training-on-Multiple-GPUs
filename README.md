@@ -42,6 +42,7 @@ For example use the command `python train.py -g 2` to use 2 GPUs
 
 Try to change the port number in line 36 of `train.py` if you encounter Runtime Error: Address already in use
 
+Check out my [blog](https://medium.com/@grakesh0301/distributed-training-of-pytorch-models-using-multiple-gpu-s-8bc4f6148a84) post to get a fair idea on Multi-GPU training
 
 ### Note: 
 This repository is experimental. Feel free to send a pull request if found any bugs/improvements
