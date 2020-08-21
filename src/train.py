@@ -32,7 +32,7 @@ def main():
                         help='ranking within the nodes')
     args = parser.parse_args()
     args.world_size = args.gpus * args.nodes
-    os.environ['MASTER_ADDR'] = '192.168.44.215'  # replace with your ip address
+    os.environ['MASTER_ADDR'] = '0.0.0.0'  # replace with your ip address
     os.environ['MASTER_PORT'] = '8888'
     mp.spawn(train, nprocs=args.gpus, args=(args,))
 
@@ -43,9 +43,9 @@ def train(gpu, args):
         rank = args.nr * args.gpus + gpu
         dist.init_process_group(backend='nccl', init_method='env://', world_size=args.world_size, rank=rank)
         torch.manual_seed(0)
-        training_data_path = "/fred/oz138/test/input/train"
-        model_path = "/home/rgopala/Training-on-Multiple-GPUs/model"
-        df = pd.read_csv("/fred/oz138/test/input/train_folds.csv")
+        training_data_path = ""
+        model_path = ""
+        df = pd.read_csv("")
         epochs = 50
         train_bs = 32
         valid_bs = 16
